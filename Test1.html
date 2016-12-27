@@ -1,0 +1,94 @@
+<!doctype html>
+<html >
+   
+   <head>
+      <script src="node_modules/angular/angular.js"></script>
+	  <style>
+       table, th , td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+       }  
+   
+       table tr:nth-child(odd) {
+        background-color: #f2f2f2;
+       }
+
+       table tr:nth-child(even) {
+        background-color: #ffffff;
+       }
+</style>
+   </head>
+   
+   <div ng-app="myApp" ng-controller = "StudentController">
+      <table border='0'>
+        <tr>
+		   <td>Enter Firstname :</td>
+		   <td><input type='text' ng-model="student.firstname"/></td>
+		</tr>
+		<tr>
+		   <td>Enter Lastname :</td>
+		   <td><input type='text' ng-model="student.lastname"/></td>
+		</tr>
+		<tr>
+		   <td>Enter Fee :</td>
+		   <td><input type='text' ng-model="student.fee"/></td>
+		</tr>
+		<tr>
+		   <td>Enter Subject Name :</td>
+		   <td><input type='text' ng-model="searchKey"/></td>
+		</tr>
+	  </table>	  
+	  <br/>
+      Full Name: {{student.fulname() | uppercase}}	  
+	   <br/>
+      Full Name: {{student.fulname() | lowercase}}	  
+	   <br/>
+	  Fee : {{student.fee | currency}}	
+	  <br/>
+	  
+	  <table border='1'>
+	    <tr>
+		   <td>Srno</td>
+		   <td>Subject</td>
+		   <td>Marks</td>
+		</tr>
+		<tr ng-repeat="subject in student.subjects | filter:searchKey">
+		   <td>{{subject.srno}}</td>
+		   <td>{{subject.name}}</td>
+		   <td>{{subject.marks}}</td>
+		</tr>
+		
+	  </table>	
+	  
+   </div>   
+   
+   
+   <script>
+      var myApp = angular.module("myApp",[]);
+   
+      myApp.controller("StudentController",function($scope){
+	     $scope.student = {
+		 firstname : 'Nagaraju',
+		 lastname : 'Ravuri',
+		 fee:500,
+		 subjects:[
+		   {srno:1,name:'Telugu',marks:60},
+		   {srno:2,name:'English',marks:80},
+		   {srno:3,name:'Hindhi',marks:90},
+		   {srno:4,name:'Matchs',marks:100},
+		   {srno:5,name:'Science',marks:100},
+		   {srno:6,name:'Sosial',marks:60},
+		   {srno:7,name:'Total',marks:450},
+		 ],
+		 fulname:function(){
+		   var studentObject = $scope.student;
+		   return 'Hellow, ' + studentObject.firstname +' '+ studentObject.lastname;
+		 }
+		 };
+	  });
+   </script>
+   
+   
+   </body>
+</html>

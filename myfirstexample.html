@@ -1,0 +1,72 @@
+<!doctype html>
+<html >
+   
+   <head>
+      <script src="node_modules/angular/angular.js"></script>
+   </head>
+   
+   <body>
+   
+        <div ng-app="myApp" ng-controller = "StudentController" >
+         
+		 <table border = "0">
+		 <tr>
+		 <td>Enter first name : </td>
+		 <td><input type="text" ng-model="student.firstname" /></td>
+		 </tr>
+		 <tr>
+		 <td>Enter last name : </td>
+		 <td><input type="text" ng-model="student.lastname" /></td>
+		 </tr>
+		  <tr>
+		 <td>Enter fee : </td>
+		 <td><input type="text" ng-model="student.fee" /></td>
+		 </tr>
+		 <td>Enter Subject : </td>
+		 <td><input type="text" ng-model="subjectName" /></td>
+		 </tr>
+		 </table>
+		  <br/><br/>
+		  Full in Upper Case : {{student.fullname() | uppercase}}<br/>
+		  Name in Upper Case : {{student.firstname + " "+student.lastname | uppercase}}<br/>
+		  Name in Lower Case : {{student.firstname + " "+student.lastname | lowercase}}<br/>
+		  fees :   {{student.fee | currency}}<br/>
+		  Subject : <ol>
+		  <li ng-repeat= "subject in student.subjects | filter:subjectName | orderBy : 'marks'">
+		  {{'subject :'+subject.name+' - Marks : '+subject.marks}}
+		  </li>
+		  </ol>
+		 
+       </div>
+   
+      
+	  
+	  
+	  
+	  <script>
+	    var myApp = angular.module("myApp", []);
+		
+	    myApp.controller("StudentController", function($scope) {
+            $scope.student = {
+			firstname : "Nagaraju",
+			lastname :"Ravuri",
+			fee:500,
+			subjects:[{name:'matths',marks:70},{name:'Telugu',marks:80},{name:'English',marks:65}],
+			
+			
+			fullname:function(){
+			var studentObject =  $scope.student;
+			return studentObject.firstname + " " +studentObject.lastname;
+			}
+			};
+            
+         });
+	  
+	  </script>
+   
+      
+      
+   </body>
+</html>
+
+
