@@ -1,0 +1,13 @@
+<table border='1'>
+	    <tr>
+		   <td>Srno</td>
+		   <td>Subject</td>
+		   <td>Marks</td>
+		</tr>
+		<tr ng-repeat="subject in student.subjects | filter:searchKey">
+		   <td>{{subject.srno}}</td>
+		   <td>{{subject.name}}</td>
+		   <td>{{subject.marks}}</td>
+		</tr>
+		
+	  </table>	

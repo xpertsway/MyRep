@@ -1,0 +1,74 @@
+<!doctype html>
+<html >
+   
+   <head>
+      <script src="js/angular.js"></script>
+	  <script src="js/main.js"></script>
+	  <script src="js/studentContoler.js"></script>
+	  <style>
+       table, th , td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+       }  
+   
+       table tr:nth-child(odd) {
+        background-color: #f2f2f2;
+       }
+
+       table tr:nth-child(even) {
+        background-color: #ffffff;
+       }
+      </style>
+   </head>
+   
+   <div  ng-app="myApp" ng-controller = "StudentController">
+   
+   <form name = "studentForm" novalidate>
+      <table border='0'>
+        <tr>
+		   <td>Enter Firstname :</td>
+		   <td>
+		     <input name="firstname" type='text' ng-model="student.firstname" required/>
+			 <span style = "color:red" ng-show = "studentForm.firstname.$dirty && studentForm.firstname.$invalid">
+                  <span ng-show = "studentForm.firstname.$error.required">First Name is required.</span>
+             </span>
+		   </td>
+		</tr>
+		<tr>
+		   <td>Enter Lastname :</td>
+		   <td><input type='text' ng-model="student.lastname" required/></td>
+		</tr>
+		<tr>
+		   <td>Enter Fee :</td>
+		   <td><input type='text' ng-model="student.fee" required/></td>
+		</tr>
+		<tr>
+		   <td>Enter Subject Name :</td>
+		   <td><input type='text' ng-model="searchKey" required/></td>
+		</tr>
+	  </table>	  
+	  <br/>
+      Full Name: {{student.fulname() | uppercase}}	  
+	   <br/>
+      Full Name: {{student.fulname() | lowercase}}	  
+	   <br/>
+	  Fee : {{student.fee | currency}}	
+	  <br/>
+	  <table border='1'>
+	    <tr>
+		   <td>Srno</td>
+		   <td>Subject</td>
+		   <td>Marks</td>
+		</tr>
+		<tr ng-repeat="subject in student.subjects | filter:searchKey">
+		   <td>{{subject.srno}}</td>
+		   <td>{{subject.name}}</td>
+		   <td>{{subject.marks}}</td>
+		</tr>
+		
+	  </table>	
+	  </form>
+   </div>   
+   </body>
+</html>
